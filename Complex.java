@@ -97,7 +97,7 @@ public class Complex
         return false;
     }
     public Complex add(Complex that) {
-        return new Complex((this.a + that.a), (this.b + that.a));
+        return new Complex((this.a + that.a), (this.b + that.b));
     }
     public Complex subtract(Complex that) {
         return new Complex((this.a - that.a), (this.b - that.b));
@@ -142,7 +142,16 @@ public class Complex
     }
     public static void main(String[] args)
     {
-        //PUT TEST CODE HERE!!!!
+        Complex test1 = new Complex(3, 5);
+        Complex test2 = new Complex(2, 3);
+        System.out.println("add testing:");
+        System.out.println(closeEnough(test1.add(test2), new Complex(5,8)));
+        System.out.println("subtract testing");
+        System.out.println(closeEnough(test1.subtract(test2), new Complex(1, 2)));
+        System.out.println("Multiply testing:");
+        System.out.println(closeEnough(test1.multiply(test2), new Complex(-9, 19)));
+
+
     }
 }
 
