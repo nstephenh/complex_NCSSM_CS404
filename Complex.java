@@ -5,25 +5,37 @@
 public class Complex
 {
     private static final double TINY = 1e-6;
+    private double a;
+    private double b;
+
+    public Complex ONE = new Complex(1);
+    public Complex ZERO = new Complex();
+    public Complex I = new Complex(0,1);
+
+
     public Complex(double _real, double _imaginary)
     {
-        //code
+        //a + bi, where real is a and imaginary is b
+        this.a = _real;
+        this.b = _imaginary;
     }
     
     public Complex(double _real)
     {
-        //code
+        this.a = _real;
+        this.b = 0;
     }
     public Complex()
     {
-        //code
+        this.a = 0;
+        this.b = 0;
     }
     public String toString()
     {
         return null;
     }
     //use this in test code to check if complex numbers
-    //are "close enough" since == and .equals and floating 
+    //are "close enough" since == and .equals and floating
     //point numbers don't always play nicely.
     private static boolean closeEnough(Complex z, Complex w)
     {
@@ -33,13 +45,11 @@ public class Complex
     {
         return false;
     }
-    public Complex add(Complex that)
-    {
-        return null;
+    public Complex add(Complex that) {
+        return new Complex((this.a + that.a), (this.b + that.a));
     }
-    public Complex subtract(Complex that)
-    {
-        return null;
+    public Complex subtract(Complex that) {
+        return new Complex((this.a - that.a), (this.b - that.b));
     }
     public Complex multiply(Complex that)
     {
