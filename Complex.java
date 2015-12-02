@@ -41,8 +41,13 @@ public class Complex
     {
         return z.subtract(w).magnitude() < TINY;
     }
-    public boolean equals(Object o)
-    {
+    public boolean equals(Object o) {
+        if (o.getClass().equals(ZERO)){
+            Complex cmplx = (Complex)o;
+            if ((cmplx.a == this.a) && (cmplx.b == this.b)){
+                return true;
+            }
+        }
         return false;
     }
     public Complex add(Complex that) {
