@@ -30,9 +30,14 @@ public class Complex
         this.a = 0;
         this.b = 0;
     }
-    public String toString()
-    {
-        return null;
+    public String toString(){
+        String printme;
+        if(this.b < 0){
+            printme = this.a + "-" + (0-this.b);
+        }else{
+            printme = this.a + "+" + this.b;
+        }
+        return printme;
     }
     //use this in test code to check if complex numbers
     //are "close enough" since == and .equals and floating
@@ -56,37 +61,34 @@ public class Complex
     public Complex subtract(Complex that) {
         return new Complex((this.a - that.a), (this.b - that.b));
     }
-    public Complex multiply(Complex that)
-    {
-        return null;
+    public Complex multiply(Complex that) {
+        return new Complex(((this.a*that.a)-(this.b*that.b)),((this.a*that.b)+(this.b*that.a)));
     }
-    public Complex divide(Complex that)
-    {
-        return null;
+    public Complex divide(Complex that) {
+        Complex numerator = this.multiply(that);
+        Double denominator = (that.magnitude()*that.magnitude());
+        return new Complex(numerator.a/denominator, numerator.b/denominator);
     }
-    public Complex conjugate()
-    {
-        return null;
+    public Complex conjugate() {
+        return new Complex(this.a, 0 - this.b);
     }
-    public double magnitude()
-    {
-        return 0;
+    public double magnitude() {
+        return Math.sqrt((this.a*this.a)+(this.b*this.b));
     }
-    public Complex pow(int n)
-    {
+    public Complex pow(int n) {
         return null;
     }
     public double re()
     {
-        return 0;
+        return this.a;
     }
     public double im()
     {
-        return 0;
+        return this.b;
     }
     public double arg()
     {
-        return 0;
+        return Math.atan2(this.a, this.b); //leared about this on wikipedia, not sure if right
     }
     public static void main(String[] args)
     {
