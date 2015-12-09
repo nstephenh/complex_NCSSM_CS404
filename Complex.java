@@ -71,12 +71,13 @@ public class Complex
         this.a = 0;
         this.b = 0;
     }
+    @Override
     public String toString(){
         String printme;
         if(this.b < 0){
-            printme = this.a + "-" + (0-this.b);
+            printme = this.a + "-" + (0-this.b) + "i";
         }else{
-            printme = this.a + "+" + this.b;
+            printme = this.a + "+" + this.b + "i";
         }
         return printme;
     }
@@ -87,6 +88,7 @@ public class Complex
     {
         return z.subtract(w).magnitude() < TINY;
     }
+    @Override
     public boolean equals(Object o) {
         if (o.getClass().equals(ZERO)){
             Complex cmplx = (Complex)o;
@@ -106,7 +108,7 @@ public class Complex
         return new Complex(((this.a*that.a)-(this.b*that.b)),((this.a*that.b)+(this.b*that.a)));
     }
     public Complex divide(Complex that) {
-        Complex numerator = this.multiply(that);
+        Complex numerator = this.multiply(that.conjugate());
         Double denominator = (that.magnitude()*that.magnitude());
         return new Complex(numerator.a/denominator, numerator.b/denominator);
     }
@@ -138,18 +140,41 @@ public class Complex
         return this.b;
     }
     public double arg() {
-        return Math.atan(this.b/this.magnitude()); //leared about this on wikipedia, not sure if right
+        return Math.asin(this.b/this.magnitude());
     }
     public static void main(String[] args)
     {
         Complex test1 = new Complex(3, 5);
         Complex test2 = new Complex(2, 3);
+        System.out.println(test1);
+        System.out.println(test2);
         System.out.println("add testing:");
         System.out.println(closeEnough(test1.add(test2), new Complex(5,8)));
         System.out.println("subtract testing");
         System.out.println(closeEnough(test1.subtract(test2), new Complex(1, 2)));
         System.out.println("Multiply testing:");
         System.out.println(closeEnough(test1.multiply(test2), new Complex(-9, 19)));
+        System.out.println("Division testing:");
+        System.out.println(closeEnough(new Complex(-9, 19).divide(test1), test2));
+        System.out.println("toString testing:");
+        System.out.println(test1 + " " + test2 + " " + new Complex(9,-19));
+        System.out.println("Congutate testing:");
+        System.out.println(closeEnough(test1, new Complex(3, -5)));
+        System.out.println(closeEnough(test1.conjugate().conjugate(), test1));
+        System.out.println("Magnitude testing:");
+        System.out.println(test2.magnitude() == Math.sqrt(13));
+        System.out.println("Power testing");
+        System.out.println();
+        System.out.println("Re testing:");
+        System.out.println(test1.a == test1.re());
+        System.out.println("im testing:");
+        System.out.println(test1.b == test1.im());
+        System.out.println("arg testing:");
+        System.out.println("This should be about .79 radians (45 degrees)");
+        System.out.println(new Complex(1,1).arg());
+
+
+
 
 
     }
